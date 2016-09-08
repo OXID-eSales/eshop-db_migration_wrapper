@@ -1,0 +1,38 @@
+#!/bin/bash
+
+[ -z $ESHOP_FACTS ] && echo "Please run this script through oe-eshop-facts, e.g. ./oe-eshop-facts $0" && exit 1
+. $ESHOP_FACT_BIN_PATH
+. $ESHOP_VENDOR_BIN_PATH/oe-eshop-migration_facts
+
+function main {
+    get_input_values
+    display_input_values
+    export_input_values
+}
+
+function get_input_values {
+    local DOCTRINE_MIGRATION_WRAPPER_SUFFIX="oe-eshop-doctrine_migration"
+
+    : ${ESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH:=$(readlink -fn "$ESHOP_VENDOR_BIN_PATH/$DOCTRINE_MIGRATION_WRAPPER_SUFFIX")}
+}
+
+function display_input_values {
+    [ "$ESHOP_VERBOSE_DB_MIGRATION_FACTS_DISPLAYED" == "1" ] && return 0
+
+    if [ ! -z "$VERBOSE" ] || [ ! -z "$ESHOP_VERBOSE_DB_MIGRATION_FACTS"] ; then
+        print_variables_header "$BASH_SOURCE"
+        echo -e "\tESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH: $ESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH"
+        echo ""
+
+        ESHOP_VERBOSE_DB_MIGRATION_FACTS_DISPLAYED="1"
+        export ESHOP_VERBOSE_DB_MIGRATION_FACTS_DISPLAYED="1"
+    fi
+}
+
+function export_input_values {
+    [ ! -z "$VERBOSE" ] && export VERBOSE="$VERBOSE"
+
+    export ESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH="$ESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH"
+}
+
+main

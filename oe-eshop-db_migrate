@@ -1,0 +1,19 @@
+#!/bin/bash
+
+[ -z $ESHOP_FACTS ] && echo "Please run this script through oe-eshop-facts, e.g. ./oe-eshop-facts $0" && exit 1
+. $ESHOP_FACT_BIN_PATH
+. "$(dirname $BASH_SOURCE)/oe-eshop-db_migration_facts"
+
+function main {
+    execute_migration
+}
+
+function execute_migration {
+    local CMD=":migrate -n"
+
+    [ -f $ESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH ] && $ESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH "$CMD"
+}
+
+main
+
+exit 0
