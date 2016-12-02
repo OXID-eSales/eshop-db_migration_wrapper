@@ -15,5 +15,3 @@ function execute_migration {
 }
 
 main
-
-exit 0

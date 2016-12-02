@@ -22,5 +22,3 @@ function generate_migration {
 }
 
 main
-
-exit 0
