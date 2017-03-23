@@ -13,7 +13,7 @@ function main {
 function get_input_values {
     local DOCTRINE_MIGRATION_WRAPPER_SUFFIX="oe-eshop-doctrine_migration"
 
-    : ${ESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH:=$(readlink -fn "$ESHOP_VENDOR_BIN_PATH/$DOCTRINE_MIGRATION_WRAPPER_SUFFIX")}
+    : ${ESHOP_DOCTRINE_MIGRATION_WRAPPER_BIN_PATH:=$(get_existing_full_path_name "$ESHOP_VENDOR_BIN_PATH/$DOCTRINE_MIGRATION_WRAPPER_SUFFIX")}
 }
 
 function display_input_values {
