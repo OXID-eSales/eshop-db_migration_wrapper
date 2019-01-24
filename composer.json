@@ -1,7 +1,7 @@
 {
     "name": "oxid-esales/eshop-db-migration-wrapper",
     "description": "OXID eShop database migration tool wrapper",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-only",
     "require": {
         "oxid-esales/eshop-doctrine-migration-wrapper": "^v1.0.1"
     },
